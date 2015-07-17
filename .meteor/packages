@@ -9,9 +9,10 @@ autopublish
 insecure
 raix:eventddp
 perak:markdown
-ovcharik:jsdiff
 perak:codemirror
-iron:router
 accounts-password
 aldeed:simple-schema
 accounts-ui
+mizzao:sharejs-codemirror
+coffeescript
+stylus

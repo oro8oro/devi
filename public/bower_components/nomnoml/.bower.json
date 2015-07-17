@@ -1,0 +1,14 @@
+{
+  "name": "nomnoml",
+  "homepage": "https://github.com/skanaar/nomnoml",
+  "_release": "9cdb47c8d3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9cdb47c8d33c2d4cffd1f8b4aeefe1a9f6d690f1"
+  },
+  "_source": "https://github.com/skanaar/nomnoml.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/skanaar/nomnoml.git",
+  "_direct": true
+}

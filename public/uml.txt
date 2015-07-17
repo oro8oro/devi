@@ -1,0 +1,363 @@
+[<package>Schema/API Representation|
+
+[Info
+  |
+  [1. attributes
+    |
+    [. 1.1. attributes
+      |
+    ]
+    [1.2. Object_attribute
+      |
+    ]
+    [1.3. Array_attribute*
+      |
+    ]
+  ]
+  |2. methods (s_ = server, _c = client)
+  |3. routes
+  |4. subscription
+]
+
+[DS
+  |
+  [db
+    |
+    Categories: Collection;
+    Orders: Collection;
+    NrOrders: Collection;
+    Products: Collection;
+    ShoppingCart: Collection;
+    Shipping: Collection;
+    ShippingCosts: Collection;
+    ShippingCostsFreightage: Collection;
+    ShippingZipZones: Collection;
+    PaymentOptions: Collection;
+    HoustonAdmins: Collection;
+    Users: Collection;
+    Wishlists: Collection
+  ]
+  [f
+    |
+    getDeliveryDate(productArray)
+  ]
+  [countries*
+    |
+    optgroup: String;
+    options: Object Array;
+    options.value: String;
+    options.label: String
+  ]
+]
+
+[Gen
+  |
+  |
+  |/ -> home;
+  /search/:searchTerm -> search
+  |productsSearch (searchText, options);
+  categsSearch (searchText, options)
+]
+
+[Categories
+  |
+  [.
+    |
+    categoryId: Number;
+    categoryName: String;
+    categoryParent: Number;
+    categoryIdSlug: String;
+    categorySlug: String;
+    isEndCategory: Boolean
+  ]
+  [productGroups*
+    |
+    description: String;
+    headline: String;
+    id: String;
+    slug: String
+  ]
+  |
+  |/category/:slug/:id? -> categoryList
+  |productsForCategory (slug, groupId);
+  categories ();
+  category (slug)
+]
+
+[Orders
+  |
+  [productsq*
+  |
+    product: Number;
+    quantity: Number;
+    price: Number;
+    w: Number;
+    h: Number;
+    d: Number
+  ]
+  [.
+  |
+  cartCost: Number;
+  userId: String;
+  orderNo: Number;
+  dateAdded: Date;
+  billingAddress: _Schemas.Address;
+  shippingAddress: _Schemas.Address;
+  userInfo: _Schemas.userValidation;
+  totalShippingCost: String;
+  shippingType: String;
+  shippingOptions: String;
+  paymentType: String
+  ]
+  |s_getOrderNumber ();
+  s_addToOrders (shoppingCart, userId / sessionIdentifier, valueCart, orderNo);
+  s_saveTempPaymentInfo (userId, paymentType)
+  |/orders -> orderlist;
+  /order/:_orderId -> order;
+  /orderNo/_orderId
+  | orders ();
+  orderNumber (orderNumb)
+]
+
+[NrOrders
+  |orderNo: Number
+  |
+]
+
+[Products
+  |
+  [.
+  |
+    _id: String
+    products_model: Int;
+    products_id: Int;
+    products_gtin_ean: Double;
+    products_name: String;
+    products_price_netto: Object;
+    products_weight: Double;
+    products_width: Int;
+    products_depth: Int;
+    products_height: Int;
+    products_choose_width: Boolean;
+    products_depth: Boolean;
+    products_height: Boolean;
+    products_manufacture: String;
+    products_group: String;
+    products_group_headline: String;
+    products_group_description: String;
+    products_group_download: String;
+    products_catalog: String;
+    products_catalog_DC: String;
+    products_catalog_PDF: String;
+    products_catalog_BK: String;
+    search_categorie: String;
+    option_heading_attributes>
+    alternatives: Array;
+    recommendations: Array;
+    accessories: Array;
+    unit: String;
+    base_calculation_factor: String;
+    base_unit: String;
+    remainder: Boolean;
+    stock: Int;
+    delivery_time: Int;
+    minimum_stock: Int;
+    minimum_order: Int;
+    products_status: false;
+    images: Array
+  ]
+  [products_description
+  |
+    [master_description
+      |
+      use_master_description: Boolean;
+      master_description: Boolean;
+      ytxt1: String;
+      ytxt10: String
+    ]
+    [detail_description_multi*
+      |
+      title: String;
+      value: String
+    ]
+    [detail_description_single*
+      |
+      title: String;
+      value: String
+    ]
+  ]
+  [search_heading_attributes>*
+    |
+    heading: String;
+    attribute: String
+  ]
+  [downloads*
+    |
+    typ: String;
+    file: String
+  ]
+  [category*
+    |
+    path: String;
+    name: String
+  ]
+  |s_addToShoppingCartlist: (productId, userId / sessionIdentifier, amount, 1)
+  |/product/:number/:slug -> productDetails;
+  s_/addproduct
+  |product (articleNumber)
+]
+
+[ShoppingCart
+  |
+  [.
+    |userId: String;
+  dateAdded: Date;
+  billingAddress: _Schemas.Address;
+  shippingAddress: _Schemas.Address;
+  userInfo: _Schemas.userValidation;
+  totalShippingCost: String;
+  shippingType: String;
+  shippingOptions: String;
+  paymentType: String
+  ]
+  [productsq*
+    |
+    product: Number;
+    quantity: Number;
+    w: Number;
+    h: Number;
+    d: Number
+  ]
+  |
+  s_saveTempOrderInfo (userId / sessionIdentifier,
+                  userToValidate, objToValidate, objToValidateShipping);
+  s_getPaypalIntent ();
+  s_setOrderCompletionEmail (cart._id);
+  s_delFromShoppingCartlist (delProductId, userId / sessionIdentifier, dimensions)
+  |/goto-checkout -> checkout;
+  /show-cart -> showcart
+  |shipping;
+  shoppingCartUserId (userId / sessionIdentifier);
+  s_moveCartToUser (sessionIdentifier, userId)
+]
+
+[ShippingCosts
+  |_id: String;
+  shipping_id: String;
+  key: String;
+  label: String;
+  selectable: String;
+  price: String;
+  forwarder_id: String
+  |s_calculateShippingCost (product, shippingAddress.postcode)
+]
+
+[ShippingCostsFreightage
+  |_id: String;
+  forwarder: String;
+  zone: String;
+  weight: String;
+  price_freightage: String;
+  abas_num2: String
+  |
+]
+
+[Shipping
+  |_id: String;
+  label: String;
+  description: String
+  |s_saveTempShippingInfo (userId, totalCost, shippingType, shippingOptions);
+  s_calculateShippingTime (productId);
+  s_getShippingType ()
+]
+
+[ShippingZipZones
+  |_id: String;
+  postcode: String;
+  zone: String
+  |
+]
+
+[PaymentOptions
+  |_id: String;
+  key: String;
+  tax: Int;
+  visible: Int;
+  label: String;
+  rank: Int
+  |
+]
+
+[HoustonAdmins
+  |_id: String;
+  user_id: String
+  |
+]
+
+[Users
+  |
+  [.
+  |
+    username: String;
+    createdAt: Date;
+    services: Object
+  ]
+  [emails*
+  |
+    address: String;
+    verified: Boolean
+  ]
+  [profile
+    |
+    [.
+      |firstName: String;
+    lastName: String;
+    gender: String;
+    company: String;
+    newsletter: Number;
+    userOldId: Number;
+    active: Number;
+    date_registered: String
+    ]
+    [addresses*
+      |streetAddress: String;
+      suburb: String;
+      postcode: String;
+      city: String;
+      state: String;
+      countryId: String;
+      phone: String;
+      fax: String;
+      index: Number;
+      email: String
+      |s_updateAddress (form);
+      s_deleteAddress (index);
+      s_updatePhone (form);
+      s_deletePhone (index)
+      ]
+    |deleteAddress
+  ]
+  |s_updateUser (form, id)
+  |/account -> account;
+  s_/adduser
+  /new-account -> new-account
+]
+
+[userValidation
+  |firstName: String;
+  lastName: String;
+  company: String
+  |
+]
+
+[Wishlists
+  |products: Number Array;
+  userId: String;
+  dateAdded: Date
+  |s_removeFromWishlist (products_model, userId);
+  s_addToWishlist (products_model, userId)
+  |/wishlist -> wishlist
+  |wishlist ()
+]
+
+]
