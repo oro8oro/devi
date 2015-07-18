@@ -40,7 +40,7 @@
       seqs[seqs.length]=diagram;
       //console.log(diagram)
 
-      return '<div class="fit" id="seq_'+(seqs.length-1)+'"><div>';
+      return '<div class="fit" id="seq_'+(seqs.length-1)+'"></div>';
     }
 
     if (lang == "uml") {
