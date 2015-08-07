@@ -3,6 +3,17 @@
 
   var umls =[],seqs=[];
   var toc = [];
+  var types={
+    "md":"text/x-markdown",
+    "styl": "text/x-styl",
+    "css": "text/css",
+    "html": "text/html",
+    "xml": "application/xml",
+    "js": "text/javascript",
+    "json": "application/json",
+    "ts": "application/typescript",
+    "php": "text/x-php"
+  };
 
 
   //$('#centerRight').width("100%").height("100%").split({orientation:'vertical', limit:2, position: pos2});

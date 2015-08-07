@@ -17,11 +17,13 @@
 
     }
     </style>
-    <script type="text/x-mathjax-config">
+    <script type="text/x-mathjax-config;executed=true">
   MathJax.Hub.Config({
     tex2jax: {
-      inlineMath: [["$","$"],["\\(","\\)"]]
-    }
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        processEscapes: true
+    },
+    skipStartupTypeset: true
   });
 </script>
     <script type="text/javascript"
@@ -41,7 +43,7 @@
     <script src="/bower_components/js-sequence-diagrams-svgjs/build/sequence-diagram-min.js"></script>
 </head>
 
-<body  class="tex2jax_ignore" style="font-family: sans-serif;">
+<body  style="font-family: sans-serif;">
     {{> forkme}}
     {{> main}}
 </body>
@@ -106,6 +108,11 @@
     {{/with}}
     </div>
     <div id="prev"  class="tex2jax_process">
+    <select>
+        <option value="">css</option>
+        <option value="">md</option>
+        <option value=""></option>
+    </select>
         <iframe seamless='seamless' frameBorder="0" src="/html.html" style="height:99%;width:100%"></iframe>
     </div>
 </template>
