@@ -693,5 +693,5 @@ ConcreteVisitor1->ConcreteElementB: OperationA()
 
 
 ```uml
-http://orobo.go.ro:4000
+http://localhost:3000/info.txt
 ```
