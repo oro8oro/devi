@@ -91,6 +91,15 @@
       //find('.output-text').textContent = result;
     }
 
+    if (lang == "persist") {
+      if (validateURL(code)){
+        document.getElementById("prev").style.top="30%"
+        document.getElementById("prev").style.height="70%"
+        return '<div style="position:fixed;width:100%;height:30%;top:20px;" ><iframe frameBorder="0" src="'+code+'" width="100%" height="100%"></div>';
+      }
+      return "";
+    }
+
     return '<pre><code class="'
         + this.options.langPrefix
         + escape(lang, true)
@@ -106,7 +115,15 @@
     pedantic: false,
     sanitize: true,
     smartLists: true,
-    smartypants: false
+    smartypants: false,
+    //highlight: function (code) {
+    //return require('highlight').highlightAuto(code).value;
+    //}
+    //highlight: function (code, lang, callback) {
+    //  require('pygmentize-bundled')({ lang: lang, format: 'html' }, code, function (err, result) {
+    //    callback(err, result.toString());
+    //  });
+    //}
   });
 
   function renderAll() {
@@ -229,8 +246,10 @@
           umls = [];
           seqs=[];
           toc = [];
+          document.getElementById("prev").style.top="0px"
+        document.getElementById("prev").style.height="100%"
           prev.innerHTML =marked(cMirror.getValue());
-          MathJax.Hub.Queue(["Reprocess", MathJax.Hub, "prev"])
+          //MathJax.Hub.Queue(["Reprocess", MathJax.Hub, "prev"])
         });
 
         cm.setOption("theme", "default");
@@ -238,6 +257,7 @@
         cm.setOption("lineWrapping", true);
         cm.setOption("smartIndent", true);
         cm.setOption("mode", "markdown");
+        cm.setOption("viewportMargin", Infinity);
         return cm.setOption("indentWithTabs", true);
       };
     }

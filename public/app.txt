@@ -1,0 +1,172 @@
+```uml
+[<package>app |
+	[<package>server |
+		[<package>persistence |
+
+		]
+	]
+	[<package>api |
+
+	]
+	[<package>common |
+		[<package>persistence |
+
+		]
+	]
+	[<package>client |
+		[<package>out |
+
+		]
+	]
+	[<package>lib |
+		[<package>mixins |
+
+		]
+	]
+]
+
+```
+
+```uml
+[<package>persistence |
+
+
+[Cursor]<:- [Subject]
+[Cursor]<:- [Relation]
+
+[Subject
+	|
+	_id: ObjectId;
+	id: Number;
+	uuid: String;
+	lang: String;
+	subject: String;
+	optional: String
+	|
+
+]
+
+[Relation
+	|
+	_id: ObjectId;
+	id: Number;
+	upd: Date;
+	ordering: Number;
+	uuid1: String;
+	relation: Number;
+	uuid2: String
+	|
+]
+
+]
+```
+
+```uml
+[<package>api |
+
+[Route
+	|path: String
+	mode: String
+	|
+
+]
+
+
+[Ontology
+	|
+	_id: ObjectId;
+	id: Number;
+	uuid_onto: String;
+	uuid: String;
+	lang: String;
+	description: String;
+	subjects_url: String;
+	relations_url: String;
+	relation_type: Number;
+	relation_name: String;
+	ordered: String;
+	other_url: String;
+	upd: Date;
+	source: String
+	|
+	
+]
+
+[Subject
+	|
+	_id: ObjectId;
+	id: Number;
+	uuid: String;
+	lang: String;
+	subject: String;
+	optional: String
+	|
+	
+	
+]
+
+[Subject]<:-[Concept]
+[Subject]<:-[Ontology]
+
+[Concept
+	|
+	|
+]
+
+
+]
+```
+List of routes:
+
++ /ontology/:lg/:_id: server;
+	/ontologies: server;
+	/ontologies/:lg: server;
+	/tree/:lg/:_id: server;
+	/tree_onto/:lg/:_id: server;
+	/tree_onto: server;
+	/tree_flat/:lg/:_id: server;
+	/: client;
+	/tools/:lg/:_id/origin/:origin: client
++ /subject_path/:lg/:_id/origin/:origin: server;
+	/subject/:lg/:_id: server;
+	/languages: server;
+	/translations/:_id: server
+	
+
+```uml
+[<package>out |
+
+[<abstract>Renderer
+	|modifiers: 0..*Modifiers
+	|
+
+]
+
+[<abstract> Modifier
+	|url: String
+	ordering: Integer
+	onRender: Boolean
+	|
+]
+[Modifier]<:-[JS | | ]
+[Modifier]<:-[CSS | | ]
+
+[Renderer]<:-[HTML |templates |]
+[Renderer]<:-[SVG ||]
+
+[TemplateHelper
+	|template: String
+	|
+]
+
+[HTML]-o0..*[TemplateHelper]
+
+[Renderer]-o0..*[Modifier]
+
+]
+```
+
+
+```uml
+http://orobo.go.ro:4000/info.txt
+```
