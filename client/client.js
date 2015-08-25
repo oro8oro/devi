@@ -41,7 +41,8 @@
 
     if (!lang) {
       return '<pre><code>'
-          + (escaped ? code : escape(code, true))
+          //+ (escaped ? code : escape(code, true))
+          + code
           + '\n</code></pre>';
     }
 
