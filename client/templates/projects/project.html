@@ -1,0 +1,18 @@
+<template name="projects">
+	{{#each projects}}
+		| <a href="#" class="{{#if current}}active{{/if}}">{{name}}</a>
+	{{/each}}
+	<button class="btn btn-warning" id="addProject">+</button>
+	{{> project}}
+</template>
+
+<template name="project">
+	{{#if project}}
+		Members: 
+		<select multiple id="selectMembers">
+			{{#each members}}
+				<option value="{{userId}}">{{userName}}</option>
+			{{/each}}
+		</select>
+	{{/if}}
+</template>

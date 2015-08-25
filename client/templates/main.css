@@ -1,0 +1,34 @@
+.cm-header-1 { font-size: 2em; }
+.cm-header-2 { font-size: 1.75em; }
+.cm-header-3 { font-size: 1.5em; }
+.cm-header-4 { font-size: 1.3em; }
+.cm-header-5 { font-size: 1.2em; }
+.cm-header-6 { font-size: 1.15em; }
+.cm-quote { color: #111; font-family: sans-serif; }
+.CodeMirror {  height: auto; }
+canvas {
+    max-width: 100%;
+}
+.fit {
+    max-width: 100%;
+}
+html,body {
+    height:100%;
+    margin:0px;
+    padding: 0px;
+}
+body .container {
+    height:100%;
+}
+.upper{
+    height:97%;
+}
+#cont1 {
+    height:100%;
+}
+.flex {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: inline-flex;
+}
