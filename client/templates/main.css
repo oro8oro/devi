@@ -32,3 +32,14 @@ body .container {
     display: -ms-flex;
     display: inline-flex;
 }
+#cont1 {
+    min-height: 630px;
+    width: 500px;
+    border: 0px solid #aaa;
+}
+.simple div {
+    overflow: auto;
+}
+.vsplitbar {
+    width: 5px;
+}
