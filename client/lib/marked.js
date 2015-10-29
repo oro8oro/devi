@@ -28,6 +28,26 @@ rend1 = new marked.Renderer();
         '"><span class="header-link"></span></a>' +
         text + '</h' + level + '>';
   }
+  rend1.link = function(href, title, text) {                                 // 862
+    if (this.options.sanitize) {                                                          // 863
+      try {                                                                               // 864
+        var prot = decodeURIComponent(unescape(href))                                     // 865
+          .replace(/[^\w:]/g, '')                                                         // 866
+          .toLowerCase();                                                                 // 867
+      } catch (e) {                                                                       // 868
+        return '';                                                                        // 869
+      }                                                                                   // 870
+      if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {         // 871
+        return '';                                                                        // 872
+      }                                                                                   // 873
+    }                                                                                     // 874
+    var out = '<a href="' + href + '" target="_blank"';                                                   // 875
+    if (title) {                                                                          // 876
+      out += ' title="' + title + '"';                                                    // 877
+    }                                                                                     // 878
+    out += '>' + text + '</a>';                                                           // 879
+    return out;                                                                           // 880
+  }; 
   rend1.code = function(code, lang, escaped) {
     if (this.options.highlight) {
       var out = this.options.highlight(code, lang);
