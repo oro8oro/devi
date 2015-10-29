@@ -17,9 +17,10 @@ html,body {
     margin:0px;
     padding: 0px;
 }
-body .container {
+#__blaze-root, .container {
     height:100%;
 }
+
 .upper{
     height:97%;
 }
