@@ -17,6 +17,9 @@ html,body {
     margin:0px;
     padding: 0px;
 }
+body {
+    font-family: sans-serif;
+}
 #__blaze-root, .container {
     height:100%;
 }
@@ -43,4 +46,8 @@ html,body {
 }
 .vsplitbar {
     width: 5px;
+}
+
+p,h1,h2,h3,h4,h5,h6 {
+    margin-left: 10px;
 }
