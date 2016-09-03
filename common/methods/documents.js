@@ -11,13 +11,18 @@ Meteor.methods ({
 		})
 	},
 	updateDocument: function(id, upd) {
+		console.log(id)
+		console.log(upd)
+
 		check(id, String)
 		check(upd, Object)
 
 		var query = {
 			_id: id,
-			userId: this.userId
+			userId: {$in: [this.userId, null]}
 		}
+		console.log(query)
+		console.log(upd)
 		D.p.Documents.update(query, {$set: upd}, function(err, id) {
         if(err)
         	return err

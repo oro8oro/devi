@@ -72,6 +72,7 @@ Template.main.onCreated(function() {
 
   Template.editor.events = {
     "keydown input[name=title]": function(e) {
+
       var id;
       if (e.keyCode !== 13) {
         return;
@@ -79,6 +80,7 @@ Template.main.onCreated(function() {
       e.preventDefault();
       $(e.target).blur();
       id = Session.get("document");
+
       Meteor.call('updateDocument', id, {
         title: e.target.value
       })
@@ -103,6 +105,7 @@ Template.main.onCreated(function() {
       window.open('/prev/'+id, '_blank')
     },
     "change input[name=editor]": function(e) {
+      console.log('change input editor: ' + e.target.value)
       return Session.set("editorType", e.target.value);
     }
   };

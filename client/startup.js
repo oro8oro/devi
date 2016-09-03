@@ -5,9 +5,9 @@ Tracker.autorun(function() {
   if(route && route.path) {
     if(Meteor.userId() && route.path === '/na/login')
       FlowRouter.go('/')
-    var user = Meteor.user()
-    if((!user || user.username !== 'loredana') && route.path.indexOf('prev') === -1 && route.path !== '/na/notauth' && route.path !== '/na/login')
-      FlowRouter.go('/na/notauth')
+    //var user = Meteor.user()
+    //if((!user || user.username !== 'loredana') && route.path.indexOf('prev') === -1 && route.path !== '/na/notauth' && route.path !== '/na/login')
+    //  FlowRouter.go('/na/notauth')
   }
 })
 
